@@ -1,6 +1,11 @@
 name: Crear y subir imagen docker
+#on:
+#  [workflow_dispatch]
+
 on:
-  [workflow_dispatch]
+  push:
+    branches:
+      - main
 
 jobs:
   publish_images:
@@ -14,6 +19,6 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: construir imagen
-        run: docker build . -t davidae03/ejemplo-actions:latest
+        run: docker build . -t davidae03/ejemplo-actions-auto:latest
       - name: subir imagen a docker
-        run: docker push davidae03/ejemplo-actions:latest
+        run: docker push davidae03/ejemplo-actions-auto:latest
